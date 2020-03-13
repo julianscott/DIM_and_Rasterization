@@ -1,12 +1,12 @@
 # DIM_and_Rasterization
 
 this code was designed to 
-•	convert one or many fastmech result csv files into rasters. 
-•	correct the known issue of iRIC exporting incorrect coordinates when results are exported directly from iRIC
-•	reduce the extent of the original fastmech result file down to a smaller area of interest (from a larger LiDAR extent down to a smaller surveyed extent, for example).
-•	create rasters from subsets or all of the scalar results output by fastmech (i.e. Depth, WaterSurfaceElevation, etc.).  
-•	provide the option to “clean up” cells that modulate back and forth from being Inundated to Inactive in a sequence of increasing discharges rasters. 
-•	provide the option to create a Digital Inundation Model (both the boundary or the full inundating footprint) from the set of rasters.  
+1. convert one or many fastmech result csv files into rasters. 
+2. correct the known issue of iRIC exporting incorrect coordinates when results are exported directly from iRIC
+3. reduce the extent of the original fastmech result file down to a smaller area of interest (from a larger LiDAR extent down to a smaller surveyed extent, for example).
+4. create rasters from subsets or all of the scalar results output by fastmech (i.e. Depth, WaterSurfaceElevation, etc.).  
+5. provide the option to “clean up” cells that modulate back and forth from being Inundated to Inactive in a sequence of increasing discharges rasters. 
+6. provide the option to create a Digital Inundation Model (both the boundary or the full inundating footprint) from the set of rasters.  
  
 Here is a quick outline of the workflow.
 1.	Identify the working directory that contains the properly formatted fastmech result csv files that you want to process (i.e. “.\\_solution_files”). 
