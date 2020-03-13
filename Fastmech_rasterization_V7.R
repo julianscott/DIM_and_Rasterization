@@ -92,6 +92,7 @@ formatted_fastmech_files <- .reduce_to_AOI_fun(AOI_extent = AOI_extent,
                                                buffer = buffer)
 
 # 3. Rasterize the scalars for each fastmech file and write to working directory.
+# Produces a nested list, one list of results for each scalar.
 scalar_grids_list <- .fastmech_rasterize_fun(formatted_fastmech_files = formatted_fastmech_files,
                         res = res,
                         projr = projr,
@@ -99,7 +100,7 @@ scalar_grids_list <- .fastmech_rasterize_fun(formatted_fastmech_files = formatte
                         subdir1 = subdir1,
                         overwrite = T)
 
-plot(scalar_grids_list[[1]][[1]],colNA = "black",main = names(scalar_grids_list[[1]][[1]]))
+# plot(scalar_grids_list[[1]][[1]],colNA = "black",main = names(scalar_grids_list[[1]][[1]]))
 par(mfrow=c(2,2)) 
 lapply(scalar_grids_list[[1]],function(x) plot(x,colNA = "black",
                                                main = names(x)))
@@ -124,7 +125,7 @@ lapply(scalar_grids_list[[1]],function(x) plot(x,colNA = "black",
 
 #################################################################################
 # 4B: Use results of step 3.
-
+# Produces a nested list, one list of results for each scalar.
 cleaned_grid_dir <- file.path(getwd(),subdir1,"_cleaned_grids")
 dir.create(cleaned_grid_dir)
 cleaned_grid_list <- .cell_modulation_cleanup_fun(cleanup_list = scalar_grids_list,
@@ -132,7 +133,7 @@ cleaned_grid_list <- .cell_modulation_cleanup_fun(cleanup_list = scalar_grids_li
                                              scalars = scalars,
                                              overwrite = T)
 
-plot(cleaned_grid_list[[1]][[1]],colNA = "black",main = paste0("Trimmed",names(cleaned_grid_list[[1]][[1]])))
+# plot(cleaned_grid_list[[1]][[1]],colNA = "black",main = paste0("Trimmed",names(cleaned_grid_list[[1]][[1]])))
 # click(xy = T)
 # length(cleaned_grid_list[[1]])
 # par(mfrow=c(2,2)) 
@@ -161,7 +162,8 @@ dir.create(DIM_grid_dir)
 # It shouldn't matter which scalar you create a DIM from, so scalar 1 is hardcoded.
 DIM_grids_list <- cleaned_grid_list[[1]]
 DIM_products <- .DIM_fun(raster_list = DIM_grids_list,DIM_grid_dir = DIM_grid_dir)
-
+par(mfrow = c(1,1))
+par(mar = c(3,3, 2, 1))
 plot(DIM_products$DIM_bound,colNA = "black")
 plot(DIM_products$DIM_full,colNA = "black")
 
